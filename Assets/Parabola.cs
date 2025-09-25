@@ -3,8 +3,10 @@ using UnityEngine;
 public class Parabola : MonoBehaviour
 {
     [SerializeField] Point point;
-    private int numberOfPoints = 11;
-    Vector2 minScreen, maxScreen;   
+    private int numberOfPoints = 100;
+    Vector2 minScreen, maxScreen;
+
+    private QuadetricFunction f;
     
     void Start()
     {
@@ -12,12 +14,15 @@ public class Parabola : MonoBehaviour
         maxScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));   
         
         float dx = (maxScreen.x - minScreen.x) / numberOfPoints;
+
+        f = new QuadetricFunction(1, 2, 3);
         
         for (int i = 0; i < numberOfPoints; i++)
         { 
-            float x_pos = minScreen.x + i * dx; 
+            float x_pos = minScreen.x + i * dx;
+            float y_pos = f.getY(x_pos);
            Point copyOfPoint = Instantiate(point);
-           copyOfPoint.transform.position = new Vector3(x_pos, 0, 0);
+           copyOfPoint.transform.position = new Vector3(x_pos, y_pos, 0);
         }
     }
 
