@@ -7,6 +7,10 @@ public class Parabola : MonoBehaviour
     Vector2 minScreen, maxScreen;
 
     private QuadetricFunction f;
+
+    [SerializeField] public float a = 1;
+    [SerializeField] public float b = 2;
+    [SerializeField] public float c = 3;    
     
     void Start()
     {
